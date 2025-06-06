@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kutch Polymer - Contact Us</title>
+    <link rel="shortcut icon" href="./favicon.svg" type="image">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #0079CC;
+      --primary-dark: #005c99;
+      --text-dark: #333;
+      --text-light: #666;
+      --bg-light: #f5f5f5;
+      --white: #ffffff;
+      --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Nunito Sans", sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: "Poppins", sans-serif;
+      font-weight: 600;
+    }
+
+    /* Header Styles */
+    header {
+      background-color: var(--white);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
+
+    .logo {
+      height: 40px;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-menu li {
+      margin-left: 30px;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-family: "Poppins", sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary-color);
+      transition: width 0.3s;
+    }
+
+    .nav-menu a:hover {
+      color: var(--primary-color);
+    }
+
+    .nav-menu a:hover::after,
+    .nav-menu a.active::after {
+      width: 100%;
+    }
+
+    .nav-menu a.active {
+      color: var(--primary-color);
+    }
+
+    /* Hero Section - REDUCED HEIGHT */
+    .hero {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      padding: 50px 0;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      max-width: 600px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-title {
+      font-size: 36px;
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+
+    .hero-text {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .bg-shape {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .bg-shape-1 {
+      width: 300px;
+      height: 300px;
+      top: -150px;
+      right: -50px;
+    }
+
+    .bg-shape-2 {
+      width: 200px;
+      height: 200px;
+      bottom: -70px;
+      left: 10%;
+    }
+
+    /* Main Content */
+    .main-content {
+      padding: 60px 0;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* Modified heading style with color split */
+    .section-title {
+      font-size: 28px;
+      margin-bottom: 30px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title .title-normal {
+      color: var(--text-dark);
+    }
+
+    .section-title .title-colored {
+      color: var(--primary-color);
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -10px;
+      width: 50px;
+      height: 3px;
+      background-color: var(--primary-color);
+    }
+
+    /* Redesigned contact card style */
+    .contact-card {
+      background: var(--white);
+      border-radius: 8px;
+      margin-bottom: 25px;
+      transition: all 0.3s ease;
+      border-left: 4px solid var(--primary-color);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    .contact-card-inner {
+      padding: 22px;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .contact-card:hover {
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      transform: translateY(-5px);
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      background-color: rgba(0, 121, 204, 0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 16px;
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .contact-card:hover .card-icon {
+      background-color: var(--primary-color);
+    }
+
+    .card-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--primary-color);
+      transition: all 0.3s ease;
+    }
+
+    .contact-card:hover .card-icon svg {
+      fill: var(--white);
+    }
+
+    .card-content h3 {
+      color: var(--text-dark);
+      font-size: 18px;
+      margin-bottom: 8px;
+      transition: color 0.3s ease;
+    }
+
+    .contact-card:hover .card-content h3 {
+      color: var(--primary-color);
+    }
+
+    .card-content p {
+      color: var(--text-light);
+      margin-bottom: 5px;
+      font-size: 15px;
+    }
+
+    .regional-title {
+      font-size: 22px;
+      margin: 40px 0 25px;
+      color: var(--text-dark);
+    }
+
+    .offices-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    /* Contact Form */
+    .contact-form-wrapper {
+      background: var(--white);
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      padding: 35px;
+      opacity: 0;
+      animation: fadeIn 0.8s ease forwards;
+      animation-delay: 0.3s;
+    }
+
+    .form-title {
+      font-size: 22px;
+      margin-bottom: 25px;
+      color: var(--primary-color);
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 18px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 15px;
+      transition: all 0.3s;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(0, 121, 204, 0.2);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .btn {
+      background-color: var(--primary-color);
+      color: var(--white);
+      border: none;
+      padding: 12px 25px;
+      border-radius: 6px;
+      font-family: "Poppins", sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: all 0.4s ease;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 121, 204, 0.3);
+    }
+
+    .btn-full {
+      width: 100%;
+    }
+
+    /* Map Section */
+    .map-section {
+      padding: 20px 0 60px;
+    }
+
+    .map-container {
+      height: 400px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 0.5s;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #1a1a1a;
+      color: #ccc;
+      padding: 50px 0 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 35px;
+      margin-bottom: 35px;
+    }
+
+    .footer-column h3 {
+      color: var(--white);
+      margin-bottom: 18px;
+      font-size: 17px;
+    }
+
+    .footer-logo {
+      margin-bottom: 18px;
+      max-width: 130px;
+    }
+
+    .footer-about p {
+      margin-bottom: 18px;
+      line-height: 1.7;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 8px;
+    }
+
+    .footer-links a {
+      color: #ccc;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-color);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #333;
+      padding-top: 18px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    /* Chat Button */
+    .chat-button {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 55px;
+      height: 55px;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 5px 15px rgba(0, 121, 204, 0.3);
+      cursor: pointer;
+      z-index: 999;
+      transition: transform 0.3s;
+      animation: pulse 2s infinite;
+    }
+
+    .chat-button:hover {
+      transform: scale(1.1);
+      animation: none;
+    }
+
+    .chat-button svg {
+      width: 25px;
+      height: 25px;
+      fill: var(--white);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 121, 204, 0.6);
+      }
+
+      70% {
+        box-shadow: 0 0 0 10px rgba(0, 121, 204, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 121, 204, 0);
+      }
+    }
+
+    .contact-card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .contact-card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .contact-card:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .offices-grid .contact-card:nth-child(1) {
+      animation-delay: 0.4s;
+    }
+
+    .offices-grid .contact-card:nth-child(2) {
+      animation-delay: 0.5s;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 992px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 40px 0;
+      }
+
+      .hero-title {
+        font-size: 28px;
+      }
+
+      .hero-text {
+        font-size: 15px;
+      }
+
+      .main-content {
+        padding: 30px 0;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .offices-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-menu {
+        display: none;
+      }
+
+      .contact-form-wrapper {
+        padding: 20px;
+      }
+
+      .map-container {
+        height: 250px;
+      }
+    }
+
+    /* Back to Home Button Styles */
+    .back-to-home {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      display: flex;
+      align-items: center;
+      background-color: var(--white);
+      color: var(--primary-color);
+      padding: 10px 16px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-family: "Poppins", sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 121, 204, 0.2);
+      z-index: 10;
+    }
+
+    /* Hero section modification to make room for back button */
+    .hero {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      padding: 100px 0 50px;
+      /* Increased top padding from 50px to 100px */
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+
+    .hero .container {
+      padding-left: 20px;
+    }
+
+    .back-to-home {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 6px 14px;
+      background-color: rgba(255, 255, 255, 0.15);
+      /* Transparent white */
+      color: #fff;
+      border-radius: 20px;
+      font-size: 14px;
+      /* border: 1px solid rgba(255, 255, 255, 0.2); */
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+      box-shadow: none;
+      /* Remove shadow to make it subtle */
+    }
+
+    .back-to-home:hover {
+      background-color: rgba(255, 255, 255, 0.25);
+      color: #fff;
+    }
+
+
+    .back-icon {
+      margin-right: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .back-to-home:hover .back-icon {
+      transform: translateX(-3px);
+    }
+
+    @media (max-width: 768px) {
+      .back-to-home {
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+    }
+
+    /* Existing styles continue below */
+    /* Header Styles */
+    header {
+      background-color: var(--white);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
+
+    .logo {
+      height: 40px;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-menu li {
+      margin-left: 30px;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-family: "Poppins", sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary-color);
+      transition: width 0.3s;
+    }
+
+    .nav-menu a:hover {
+      color: var(--primary-color);
+    }
+
+    .nav-menu a:hover::after,
+    .nav-menu a.active::after {
+      width: 100%;
+    }
+
+    .nav-menu a.active {
+      color: var(--primary-color);
+    }
+
+    /* Hero Section - REDUCED HEIGHT */
+    .hero {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      padding: 100px 0 50px;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+
+    .hero-content {
+      max-width: 600px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-title {
+      font-size: 36px;
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+
+    .hero-text {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .bg-shape {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .bg-shape-1 {
+      width: 300px;
+      height: 300px;
+      top: -150px;
+      right: -50px;
+    }
+
+    .bg-shape-2 {
+      width: 200px;
+      height: 200px;
+      bottom: -70px;
+      left: 10%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Back to Home Button -->
+  <a href="index.html" class="back-to-home">
+    <svg class="back-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+      fill="currentColor">
+      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+    </svg>
+    Home
+  </a>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Get in Touch with Kutch Polymer</h1>
+      </div>
+    </div>
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+  </section>
+
+  <section class="main-content">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h2 class="section-title">
+            <span class="title-normal">Contact</span>
+            <span class="title-colored">Information</span>
+          </h2>
+
+          <div class="contact-card">
+            <div class="contact-card-inner">
+              <div class="card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path
+                    d="M12 0c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z" />
+                </svg>
+              </div>
+              <div class="card-content">
+                <h3>Corporate Office</h3>
+                <p>Survey No. 322/2, Old Nandasar Road, Rapar,</p>
+                <p>Kutch, Gujarat – 370165</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-card-inner">
+              <div class="card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path
+                    d="M20 22.621l-3.521-6.795c-.008.004-1.974.97-2.064 1.011-2.24 1.086-6.799-7.82-4.609-8.994l2.083-1.026-3.493-6.817-2.106 1.039c-7.202 3.755 4.233 25.982 11.6 22.615.121-.055 2.102-1.029 2.11-1.033z" />
+                </svg>
+              </div>
+              <div class="card-content">
+                <h3>Phone</h3>
+                <p>+91 99203-75375
+                  /
+                  +91 98205-56353</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-card-inner">
+              <div class="card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path
+                    d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z" />
+                </svg>
+              </div>
+              <div class="card-content">
+                <h3>Email</h3>
+                <p>info@kutchpolymer.co.in</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-wrapper">
+          <h3 class="form-title">Send Us a Message</h3>
+          <form id="contactForm">
+            <div class="form-group">
+              <select class="form-control" required>
+                <option value="" disabled selected>Area of Interest *</option>
+                <option value="inquiry">Product Inquiry</option>
+                <option value="support">Technical Support</option>
+                <option value="partnership">Partnership</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Full Name *" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Company Name">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <input type="email" class="form-control" placeholder="Email Address *" required>
+              </div>
+              <div class="form-group">
+                <input type="tel" class="form-control" placeholder="Phone Number *" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <select class="form-control" required>
+                  <option value="India" selected>India</option>
+                  <option value="USA">USA</option>
+                  <option value="UAE">UAE</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="City *" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <textarea class="form-control" placeholder="Your Message *" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-full">Submit Message</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section class="map-section">
+  <div class="container">
+    <div class="map-container">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d814.3202659089517!2d70.6453948!3d23.5900781!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395a63bbe1197523%3A0x329247a0efc70367!2sKutch%20Polymer!5e1!3m2!1sen!2sin!4v1746813689960!5m2!1sen!2sin" 
+        width="600" 
+        height="450" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+  <script>
+   document.addEventListener('DOMContentLoaded', function () {
+  const contactForm = document.getElementById('contactForm');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const interest = contactForm.querySelector('select').value;
+      const name = contactForm.querySelector('input[placeholder="Full Name *"]').value;
+      const company = contactForm.querySelector('input[placeholder="Company Name"]').value;
+      const email = contactForm.querySelector('input[placeholder="Email Address *"]').value;
+      const phone = contactForm.querySelector('input[placeholder="Phone Number *"]').value;
+      const country = contactForm.querySelectorAll('select')[1].value;
+      const city = contactForm.querySelector('input[placeholder="City *"]').value;
+      const message = contactForm.querySelector('textarea').value;
+
+      const whatsappMessage = `Hello, I would like to contact you.\n\n*Area of Interest:* ${interest}\n*Full Name:* ${name}\n*Company Name:* ${company}\n*Email:* ${email}\n*Phone:* ${phone}\n*Country:* ${country}\n*City:* ${city}\n*Message:* ${message}`;
+
+      const encodedMessage = encodeURIComponent(whatsappMessage);
+      const whatsappURL = `https://wa.me/919820556353?text=${encodedMessage}`;
+
+      window.open(whatsappURL, '_blank');
+    });
+  }
+
+
+
+      // Animation for back button
+      const backButton = document.querySelector('.back-to-home');
+      if (backButton) {
+        // Add subtle entrance animation
+        backButton.style.opacity = '0';
+        backButton.style.transform = 'translateX(-10px)';
+
+        setTimeout(() => {
+          backButton.style.transition = 'all 0.5s ease';
+          backButton.style.opacity = '1';
+          backButton.style.transform = 'translateX(0)';
+        }, 300);
+      }
+
+      // Staggered animations for elements
+      document.querySelectorAll('.contact-card').forEach((card, index) => {
+        // Add hover effect for card
+        card.addEventListener('mouseenter', function () {
+          this.style.transform = 'translateY(-5px)';
+          this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+        });
+
+        card.addEventListener('mouseleave', function () {
+          this.style.transform = 'translateY(0)';
+          this.style.boxShadow = '0 3px 10px rgba(0,0,0,0.05)';
+        });
+      });
+
+      
+      }
+    );
+  </script>
+</body>
+
+</html>

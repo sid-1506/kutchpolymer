@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail Page</title>
+    <link rel="shortcut icon" href="../favicon.svg" type="image">
+
+
+    <style>
+        /* Base Styles with CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #0079cc;
+            /* Updated primary color */
+            --primary-light: #dbeafe;
+            /* Light variant */
+            --text-muted: #6b7280;
+            /* Muted text color */
+            --bg-light: #f3f4f6;
+            /* Light background */
+            --bg-white: #ffffff;
+            /* White background */
+            --border-color: #e5e7eb;
+            /* Border color */
+            --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition-normal: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            overflow-x: hidden;
+        }
+
+
+
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(3px);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 15;
+            transition: var(--transition-normal);
+        }
+
+        .overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .header-bottom {
+            padding: 20px 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo img {
+            height: 50px;
+            animation: pulse 2s infinite;
+        }
+
+        /* Improved Back Button Styles */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            color: #fff;
+            background-color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 18px;
+            border-radius: 8px;
+            transition: var(--transition-normal);
+            margin-bottom: 20px;
+            animation: fadeIn 0.8s ease-out;
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
+        }
+
+        .back-button ion-icon {
+            margin-right: 8px;
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .back-button:hover ion-icon {
+            transform: translateX(-3px);
+        }
+
+        /* Main Content Styles */
+        .breadcrumb {
+            padding: 20px 0;
+            color: var(--text-muted);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .breadcrumb a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition-normal);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary-color);
+        }
+
+        .breadcrumb span {
+            margin: 0 10px;
+        }
+
+        .category-badge {
+            display: inline-block;
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 5px rgba(37, 99, 235, 0.2);
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .product-detail {
+            display: flex;
+            background-color: var(--bg-white);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            box-shadow: var(--card-shadow);
+            animation: fadeIn 1s ease-out;
+        }
+
+        .product-image {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: relative;
+            overflow: hidden;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            height: auto;
+            transition: transform 0.5s ease;
+            animation: pulse 5s infinite ease-in-out;
+        }
+
+        .product-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            flex: 1;
+            padding: 40px;
+            animation: slideInRight 1s ease-out;
+        }
+
+        .product-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+            animation: slideInRight 1.2s ease-out;
+        }
+
+        .product-description {
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-size: 16px;
+            animation: slideInRight 1.4s ease-out;
+        }
+
+        .enquire-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 25px 0;
+            transition: var(--transition-normal);
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            position: relative;
+            overflow: hidden;
+            animation: slideInUp 1.6s ease-out;
+        }
+
+        .enquire-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.4);
+        }
+
+        .enquire-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: 0.5s ease-out;
+        }
+
+        .enquire-btn:active::after {
+            width: 300px;
+            height: 300px;
+            opacity: 0;
+        }
+
+        .product-class {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 16px;
+            background-color: #f9fafb;
+            transition: var(--transition-normal);
+            animation: slideInUp 1.8s ease-out;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            padding-right: 40px;
+        }
+
+        .product-class:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        .product-specs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 25px;
+            animation: slideInUp 1.6s ease-out;
+        }
+
+        .spec-item {
+            background-color: #f9fafb;
+            padding: 16px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition-normal);
+        }
+
+        .spec-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-color: #d1d5db;
+        }
+
+        .spec-label {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .spec-value {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .related-products {
+            padding: 40px 0;
+            animation: fadeIn 1.8s ease-out;
+        }
+
+        .related-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+            animation: slideInLeft 1.2s ease-out;
+        }
+
+        .related-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .product-card {
+            background-color: var(--bg-white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: var(--transition-normal);
+            animation: slideInUp 2s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .product-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .product-card:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .product-card:nth-child(3) {
+            animation-delay: 0.5s;
+        }
+
+        .product-card:nth-child(4) {
+            animation-delay: 0.7s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .product-card-image {
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card-image::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 50%);
+            transform: rotate(45deg);
+            transition: 0.8s ease;
+        }
+
+        .product-card:hover .product-card-image::before {
+            top: 100%;
+            left: 100%;
+        }
+
+        .product-card-image img {
+            max-width: 80%;
+            max-height: 160px;
+            object-fit: contain;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-card-image img {
+            transform: scale(1.1);
+        }
+
+        .product-card-info {
+            padding: 24px;
+            text-align: center;
+        }
+
+        .product-card-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            transition: var(--transition-normal);
+        }
+
+        .product-card:hover .product-card-title {
+            color: var(--primary-color);
+        }
+
+        .arrow-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #f3f4f6;
+            border-radius: 50%;
+            margin: 0 auto;
+            transition: var(--transition-normal);
+        }
+
+        .arrow-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+        }
+
+        .arrow-link ion-icon {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .arrow-link:hover ion-icon {
+            transform: translateX(3px);
+        }
+
+        .main-content {
+            min-height: calc(100vh - 100px);
+            padding: 30px 0;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 991px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .product-detail {
+                flex-direction: column;
+            }
+
+            .product-image,
+            .product-info {
+                animation: slideInUp 1s ease-out;
+            }
+
+            /* Keep product specs as 2 per row even on mobile */
+            .product-specs {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            /* Adjust spec items for mobile */
+            .spec-item {
+                padding: 12px;
+            }
+
+            .spec-label {
+                font-size: 13px;
+                margin-bottom: 4px;
+            }
+
+            .spec-value {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-title {
+                font-size: 24px;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+            /* Still maintain 2 specs per row on very small screens */
+            .product-specs {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+        }
+
+        /* Loading Animation for Page */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s, visibility 0.8s;
+        }
+
+        .page-loader.loaded {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 4px solid var(--primary-light);
+            border-bottom-color: var(--primary-color);
+            border-radius: 50%;
+            animation: loader-spin 1s linear infinite;
+        }
+
+        @keyframes loader-spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Remove card effects */
+        .product-detail,
+        .spec-item {
+            box-shadow: none;
+            border: none;
+            background-color: transparent;
+            border-radius: 0;
+            transition: none;
+            animation: none;
+        }
+
+        /* Remove image hover scale & background */
+        .product-image,
+        .product-card-image {
+            background-color: transparent;
+            padding: 0;
+        }
+
+        .product-image img,
+        .product-card-image img {
+            transform: none !important;
+            animation: none;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Remove button animation & effects */
+        .enquire-btn {
+            box-shadow: none;
+            /* border-radius: 0; */
+            transform: none;
+            background-color: var(--primary-color);
+        }
+
+
+        .product-card:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+
+        /* Simplify grid layout */
+        .products-grid {
+            gap: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Page Loader -->
+    <div class="page-loader">
+        <div class="loader"></div>
+    </div>
+
+    <div class="main-content">
+        <div class="container">
+            <!-- Updated Back Button with Correct Path -->
+            <a href="../PRODUCTS/pipe.html" class="back-button">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+            </a>
+
+            <div class="product-detail">
+                <div class="product-image">
+                    <img src="../PRODUCTS/images/14-upvc-red-tee.png" alt="Plumbing Pipe 40sch 3mtr" />
+                </div>
+                <div class="product-info">
+                    <div class="category-badge">AGRICULTURAL</div>
+                    <h1 class="product-title">Plumbing Pipe 40sch 3mtr</h1>
+
+                    <p class="product-description">
+                        High-quality UPVC plumbing pipes designed for agricultural applications. These Schedule 40 pipes
+                        with 3-meter length provide reliable performance for irrigation and water management systems.
+                    </p>
+
+                    <div class="product-specs">
+                        <div class="spec-item">
+                            <div class="spec-label">Material</div>
+                            <div class="spec-value">UPVC</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Length</div>
+                            <div class="spec-value">3 meters</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Schedule</div>
+                            <div class="spec-value">40</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Color</div>
+                            <div class="spec-value">Blue</div>
+                        </div>
+                    </div>
+
+                    <a href="#" class="enquire-btn">ENQUIRE NOW</a>
+                    <br>
+                    <select class="product-class">
+                        <option selected disabled>Select by Size</option>
+                        <option>15mm (1/2 inch)</option>
+                        <option>20mm (3/4 inch)</option>
+                        <option>25mm (1 inch)</option>
+                        <option>32mm (1-1/4 inch)</option>
+                        <option>40mm (1-1/2 inch)</option>
+                        <option>50mm (2 inch)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="related-products">
+                <h2 class="related-title">Related Products</h2>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-card-image">
+                            <img src="../PRODUCTS/images/07-upvc-coupler.png" alt="Plumbing pipe 40sch 6mtr" />
+                        </div>
+                        <div class="product-card-info">
+                            <h3 class="product-card-title">Plumbing pipe 40sch 6mtr</h3>
+                            <a href="#" class="arrow-link">
+                                <ion-icon name="arrow-forward-outline"></ion-icon>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-card-image">
+                            <img src="../PRODUCTS/images/08-upvc-end-cap.png" alt="Plumbing pipe 80sch 3mtr"
+                                style="filter: hue-rotate(320deg);" />
+                        </div>
+                        <div class="product-card-info">
+                            <h3 class="product-card-title">Plumbing pipe 80sch 3mtr</h3>
+                            <a href="#" class="arrow-link">
+                                <ion-icon name="arrow-forward-outline"></ion-icon>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-card-image">
+                            <img src="../PRODUCTS/images/13-upvc-threaded-elbow.png" alt="Plumbing pipe 80sch 6mtr"
+                                style="filter: hue-rotate(320deg);" />
+                        </div>
+                        <div class="product-card-info">
+                            <h3 class="product-card-title">Plumbing pipe 80sch 6mtr</h3>
+                            <a href="#" class="arrow-link">
+                                <ion-icon name="arrow-forward-outline"></ion-icon>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-card-image">
+                            <img src="../PRODUCTS/images/13-upvc-threaded-elbow.png" alt="UPVC Coupler" />
+                        </div>
+                        <div class="product-card-info">
+                            <h3 class="product-card-title">UPVC Coupler</h3>
+                            <a href="#" class="arrow-link">
+                                <ion-icon name="arrow-forward-outline"></ion-icon>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ionicons Script -->
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/ionicons/ionicons.js"></script>
+
+    <!-- Enhanced Mobile Menu Toggle & Page Loading Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Page loading animation
+            setTimeout(function () {
+                document.querySelector('.page-loader').classList.add('loaded');
+            }, 800);
+
+            // Mobile menu functionality
+            const navOpenBtn = document.querySelector('[data-nav-open-btn]');
+            const navCloseBtn = document.querySelector('[data-nav-close-btn]');
+            const navbar = document.querySelector('[data-navbar]');
+            const overlay = document.querySelector('[data-overlay]');
+
+            const toggleNavbar = function () {
+                navbar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('nav-active');
+            }
+
+            if (navOpenBtn) navOpenBtn.addEventListener('click', toggleNavbar);
+            if (navCloseBtn) navCloseBtn.addEventListener('click', toggleNavbar);
+            if (overlay) overlay.addEventListener('click', toggleNavbar);
+
+            // Add ripple effect to enquire button
+            const enquireBtn = document.querySelector('.enquire-btn');
+            if (enquireBtn) {
+                enquireBtn.addEventListener('click', function (e) {
+                    const x = e.clientX - e.target.offsetLeft;
+                    const y = e.clientY - e.target.offsetTop;
+
+                    const ripple = document.createElement('span');
+                    ripple.style.left = `${x}px`;
+                    ripple.style.top = `${y}px`;
+
+                    this.appendChild(ripple);
+
+                    setTimeout(function () {
+                        ripple.remove();
+                    }, 600);
+                });
+            }
+
+            // Animate items when they come into view
+            const animateOnScroll = function () {
+                const elements = document.querySelectorAll('.product-card, .spec-item');
+
+                elements.forEach(item => {
+                    const position = item.getBoundingClientRect().top;
+                    const screenHeight = window.innerHeight;
+
+                    if (position < screenHeight - 100) {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // Run once on load
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kutch Polymer - About Us</title>
+  <link rel="shortcut icon" href="./favicon.svg" type="image">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+    <script src="./assets/js/script.js"></script>
+  <style>
+    :root {
+      --primary-color: #0079CC;
+      --primary-dark: #005c99;
+      --text-dark: #333;
+      --text-light: #666;
+      --bg-light: #f5f5f5;
+      --white: #ffffff;
+      --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Nunito Sans", sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: "Poppins", sans-serif;
+      font-weight: 600;
+    }
+
+    /* Header Styles */
+    header {
+      background-color: var(--white);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
+
+    .logo {
+      height: 40px;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-menu li {
+      margin-left: 30px;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-family: "Poppins", sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary-color);
+      transition: width 0.3s;
+    }
+
+    .nav-menu a:hover {
+      color: var(--primary-color);
+    }
+
+    .nav-menu a:hover::after,
+    .nav-menu a.active::after {
+      width: 100%;
+    }
+
+    .nav-menu a.active {
+      color: var(--primary-color);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      padding: 100px 0 50px;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      max-width: 600px;
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .hero-title {
+      font-size: 36px;
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+
+    .hero-text {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .bg-shape {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .bg-shape-1 {
+      width: 300px;
+      height: 300px;
+      top: -150px;
+      right: -50px;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .bg-shape-2 {
+      width: 200px;
+      height: 200px;
+      bottom: -70px;
+      left: 10%;
+      animation: float 6s ease-in-out infinite reverse;
+    }
+
+    /* Main Content */
+    .main-content {
+      padding: 80px 0;
+    }
+
+    /* Our Story Section */
+    .story-section {
+      margin-bottom: 60px;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    /* Section title style */
+    .section-title {
+      font-size: 28px;
+      margin-bottom: 40px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title .title-normal {
+      color: var(--text-dark);
+    }
+
+    .section-title .title-colored {
+      color: var(--primary-color);
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -10px;
+      width: 50px;
+      height: 3px;
+      background-color: var(--primary-color);
+    }
+
+    /* Story content styles */
+    .story-content {
+      opacity: 0;
+      animation: fadeIn 1s ease forwards 0.3s;
+    }
+
+    .story-content p {
+      margin-bottom: 20px;
+      color: var(--text-light);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .story-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .story-image-container {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      animation: fadeIn 1s ease forwards 0.5s;
+    }
+
+    .story-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .story-image-container:hover .story-image {
+      transform: scale(1.05);
+    }
+
+    /* Values Section - REDESIGNED */
+    .values-section {
+      padding: 80px 0;
+      background-color: var(--white);
+      margin-bottom: 60px;
+    }
+
+    .values-container {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .values-container .section-title {
+      display: inline-block;
+    }
+
+    .values-container .section-title::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .values-description {
+      max-width: 700px;
+      margin: 0 auto 40px;
+      color: var(--text-light);
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .value-card {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 40px 30px;
+      box-shadow: var(--shadow);
+      transition: all 0.4s ease;
+      border-bottom: 4px solid transparent;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    .value-card:hover {
+      transform: translateY(-10px);
+      border-bottom: 4px solid var(--primary-color);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .value-icon {
+      width: 70px;
+      height: 70px;
+      background-color: rgba(0, 121, 204, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 25px;
+      transition: all 0.3s ease;
+    }
+
+    .value-card:hover .value-icon {
+      background-color: var(--primary-color);
+    }
+
+    .value-icon svg {
+      width: 35px;
+      height: 35px;
+      fill: var(--primary-color);
+      transition: all 0.3s ease;
+    }
+
+    .value-card:hover .value-icon svg {
+      fill: var(--white);
+    }
+
+    .value-title {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: var(--text-dark);
+    }
+
+    .value-text {
+      color: var(--text-light);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* Stats Section - REDESIGNED */
+    .stats-section {
+      margin-bottom: 80px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+    }
+
+    .stat-item {
+      text-align: center;
+      transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.5s ease forwards;
+      position: relative;
+    }
+
+    .stat-item::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 3px;
+      background-color: var(--primary-color);
+      transition: width 0.3s ease;
+    }
+
+    .stat-item:hover::after {
+      width: 60px;
+    }
+
+    .stat-number {
+      font-size: 52px;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      font-family: "Poppins", sans-serif;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 16px;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+
+    /* Team Section */
+    .team-section {
+      padding-bottom: 80px;
+    }
+
+    .team-container {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .team-container .section-title {
+      display: inline-block;
+    }
+
+    .team-container .section-title::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .team-description {
+      max-width: 700px;
+      margin: 0 auto 40px;
+      color: var(--text-light);
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
+
+    .team-card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    .team-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .team-image-container {
+      height: 300px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .team-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .team-card:hover .team-image {
+      transform: scale(1.1);
+    }
+
+    .team-info {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .team-name {
+      font-size: 22px;
+      margin-bottom: 5px;
+      color: var(--text-dark);
+    }
+
+    .team-position {
+      color: var(--primary-color);
+      font-size: 16px;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .team-bio {
+      color: var(--text-light);
+      font-size: 15px;
+      line-height: 1.8;
+      margin-bottom: 25px;
+    }
+
+    .team-social {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(0, 121, 204, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .social-icon:hover {
+      background-color: var(--primary-color);
+    }
+
+    .social-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--primary-color);
+      transition: all 0.3s ease;
+    }
+
+    .social-icon:hover svg {
+      fill: var(--white);
+    }
+
+    /* Back to Home Button Styles */
+    .back-to-home {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 8px 16px;
+      background-color: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border-radius: 30px;
+      font-size: 14px;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .back-to-home:hover {
+      background-color: rgba(255, 255, 255, 0.25);
+      transform: translateX(-5px);
+    }
+
+    .back-icon {
+      margin-right: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .back-to-home:hover .back-icon {
+      transform: translateX(-3px);
+    }
+
+    /* Sustainability Section - REDESIGNED */
+    .sustainability-section {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #f5f9ff, #edf4ff);
+      margin-bottom: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sustainability-header {
+      text-align: center;
+      margin-bottom: 60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .sustainability-title {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: var(--text-dark);
+    }
+
+    .sustainability-title .title-colored {
+      color: var(--primary-color);
+    }
+
+    .sustainability-description {
+      max-width: 700px;
+      margin: 0 auto;
+      color: var(--text-light);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .sustainability-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .sustainability-image {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .sustainability-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    /* REDESIGNED SUSTAINABILITY FEATURES */
+    .sustainability-features {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 25px;
+      transition: all 0.4s ease;
+      padding-bottom: 20px;
+      position: relative;
+    }
+
+    .feature-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 70px;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, rgba(0, 121, 204, 0.2), rgba(0, 121, 204, 0));
+    }
+
+    .feature-item:hover {
+      transform: translateX(10px);
+    }
+
+    .feature-icon {
+      min-width: 50px;
+      height: 50px;
+      background-color: rgba(0, 121, 204, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .feature-item:hover .feature-icon {
+      background-color: var(--primary-color);
+    }
+
+    .feature-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--primary-color);
+      transition: all 0.3s ease;
+    }
+
+    .feature-item:hover .feature-icon svg {
+      fill: var(--white);
+    }
+
+    .feature-content h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: var(--text-dark);
+    }
+
+    .feature-content p {
+      color: var(--text-light);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .bg-pattern {
+      position: absolute;
+      opacity: 0.05;
+      z-index: 1;
+    }
+
+    .pattern-1 {
+      top: -50px;
+      right: -50px;
+      width: 300px;
+      height: 300px;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+    }
+
+    .pattern-2 {
+      bottom: -80px;
+      left: -80px;
+      width: 250px;
+      height: 250px;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #1a1a1a;
+      color: #ccc;
+      padding: 50px 0 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 35px;
+      margin-bottom: 35px;
+    }
+
+    .footer-column h3 {
+      color: var(--white);
+      margin-bottom: 18px;
+      font-size: 17px;
+    }
+
+    .footer-logo {
+      margin-bottom: 18px;
+      max-width: 130px;
+    }
+
+    .footer-about p {
+      margin-bottom: 18px;
+      line-height: 1.7;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 8px;
+    }
+
+    .footer-links a {
+      color: #ccc;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-color);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #333;
+      padding-top: 18px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    .value-card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .value-card:nth-child(2) {
+      animation-delay: 0.3s;
+    }
+
+    .value-card:nth-child(3) {
+      animation-delay: 0.5s;
+    }
+
+    .team-card:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+
+    .team-card:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+
+    .stat-item:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .stat-item:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .stat-item:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .stat-item:nth-child(4) {
+      animation-delay: 0.4s;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 992px) {
+      .story-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .sustainability-content {
+        grid-template-columns: 1fr;
+      }
+
+      .sustainability-image {
+        order: -1;
+        max-width: 500px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 80px 0 40px;
+      }
+
+      .hero-title {
+        font-size: 28px;
+      }
+
+      .hero-text {
+        font-size: 15px;
+      }
+
+      .main-content {
+        padding: 50px 0;
+      }
+
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .back-to-home {
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+
+      .feature-item {
+        padding: 15px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-menu {
+        display: none;
+      }
+
+      .feature-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .feature-icon {
+        margin-bottom: 15px;
+      }
+
+      .feature-item:not(:last-child)::after {
+        left: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Back to Home Button -->
+  <a href="index.html" class="back-to-home">
+    <svg class="back-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+      fill="currentColor">
+      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+    </svg>
+    Home
+  </a>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">About Kutch Polymer</h1>
+        <p class="hero-text">Innovative Polymer Solutions for a Sustainable Future</p>
+      </div>
+    </div>
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+  </section>
+
+  <section class="main-content">
+    <div class="container">
+      <div class="story-section">
+        <div class="story-grid">
+          <div class="story-content">
+            <h2 class="section-title">
+              <span class="title-normal">Our</span>
+              <span class="title-colored">Story</span>
+            </h2>
+            <p>Founded in 2005, Kutch Polymer began with a simple vision: to revolutionize the piping industry with
+              innovative polymer solutions. What started as a small manufacturing unit in the heart of Gujarat has now
+              evolved into one of the region's most trusted providers of high-quality PVC and HDPE pipes and fittings.
+            </p>
+            <p>Our journey has been defined by continuous innovation, unwavering commitment to quality, and a deep
+              understanding of our customers' needs. From irrigation systems that have transformed agricultural
+              practices to plumbing solutions that have improved water management in urban areas, our products have made
+              a significant impact across various sectors.</p>
+            <p>Today, Kutch Polymer stands as a symbol of excellence in the polymer industry, with state-of-the-art
+              manufacturing facilities, a diverse product portfolio, and a strong presence across India and
+              international markets.</p>
+          </div>
+          <div class="story-image-container">
+            <img src="./assets/images/blog-2.jpg" alt="Kutch Polymer Factory" class="story-image">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="values-section">
+    <div class="container">
+      <div class="values-container">
+        <h2 class="section-title">
+          <span class="title-normal">Our</span>
+          <span class="title-colored">Values</span>
+        </h2>
+        <p class="values-description">Our core values guide everything we do at Kutch Polymer, from product development
+          to customer service. These principles have been the foundation of our success for over two decades.</p>
+      </div>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">
+            <!-- Improved Excellence Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2zm0 2.5L9.94 7.74 4.99 8.5l3.5 3.41-.83 4.82L12 14.42l4.34 2.31-.83-4.82 3.5-3.41-4.95-.76L12 4.5z" />
+            </svg>
+          </div>
+          <h3 class="value-title">Excellence</h3>
+          <p class="value-text">We are committed to excellence in everything we do, from product design and
+            manufacturing to customer service and support.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">
+            <!-- Improved Innovation Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+              <path
+                d="M12 6c-3.31 0-6 2.69-6 6 0 2.97 2.16 5.44 5 5.92V16h2v1.92c2.84-.48 5-2.95 5-5.92 0-3.31-2.69-6-6-6zm-1 10v-2h2v2h-2zm0-4V8h2v4h-2z" />
+            </svg>
+          </div>
+          <h3 class="value-title">Innovation</h3>
+          <p class="value-text">We continuously innovate to develop sustainable polymer solutions that address the
+            evolving needs of our customers and the environment.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">
+            <!-- Improved Integrity Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path
+                d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm6 9.09c0 4-2.55 7.7-6 8.83-3.45-1.13-6-4.82-6-8.83v-4.7l6-2.25 6 2.25v4.7z" />
+              <path
+                d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" />
+            </svg>
+          </div>
+          <h3 class="value-title">Integrity</h3>
+          <p class="value-text">We conduct our business with the highest levels of integrity, transparency, and ethical
+            standards, building trust with our customers and partners.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">9+</div>
+          <div class="stat-label">Years of Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">37+</div>
+          <div class="stat-label">Dedicated Employees</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">221+</div>
+          <div class="stat-label">Satisfied Customers</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">137+</div>
+          <div class="stat-label">Farmers Served</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sustainability-section">
+    <div class="container">
+      <div class="sustainability-header">
+        <h2 class="sustainability-title">
+          <span class="title-normal">Our Commitment to</span>
+          <span class="title-colored">Sustainability</span>
+        </h2>
+        <p class="sustainability-description">At Kutch Polymer, we believe that the future of the polymer industry lies
+          in sustainable practices. Our commitment to environmental responsibility drives our innovation and shapes our
+          business practices.</p>
+      </div>
+      <div class="sustainability-content">
+        <div class="sustainability-features">
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#0079CC">
+                <path
+                  d="M12 22c4.97 0 9-4.03 9-9-4.97 0-9 4.03-9 9zM5.6 10.25c0 1.38 1.12 2.5 2.5 2.5.53 0 1.01-.16 1.42-.44l-.02.19c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5l-.02-.19c.4.28.89.44 1.42.44 1.38 0 2.5-1.12 2.5-2.5 0-1-.59-1.85-1.43-2.25.84-.4 1.43-1.25 1.43-2.25 0-1.38-1.12-2.5-2.5-2.5-.53 0-1.01.16-1.42.44l.02-.19C14.5 2.12 13.38 1 12 1S9.5 2.12 9.5 3.5l.02.19c-.4-.28-.89-.44-1.42-.44-1.38 0-2.5 1.12-2.5 2.5 0 1 .59 1.85 1.43 2.25-.84.4-1.43 1.25-1.43 2.25zM12 5.5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5S9.5 9.38 9.5 8s1.12-2.5 2.5-2.5z" />
+              </svg>
+            </div>
+            <div class="feature-content">
+              <h3>Eco-Friendly Manufacturing</h3>
+              <p>Our state-of-the-art manufacturing facilities are designed to minimize environmental impact with
+                reduced energy consumption and waste generation.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#0079CC">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+              </svg>
+            </div>
+            <div class="feature-content">
+              <h3>Recycling Initiatives</h3>
+              <p>We have developed comprehensive recycling programs to recover and repurpose polymer waste, reducing
+                landfill burden and conserving resources.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#0079CC">
+                <path
+                  d="M15 7.5V2H9v5.5l3 3 3-3zM7.5 9H2v6h5.5l3-3-3-3zM9 16.5V22h6v-5.5l-3-3-3 3zM16.5 9l-3 3 3 3H22V9h-5.5z" />
+              </svg>
+            </div>
+            <div class="feature-content">
+              <h3>Sustainable Product Development</h3>
+              <p>Our R&D team is dedicated to developing biodegradable polymers and eco-friendly alternatives that
+                maintain high performance while reducing environmental impact.</p>
+            </div>
+          </div>
+        </div>
+        <div class="sustainability-image">
+          <img src="./assets/images/blog-3.jpg" alt="Sustainable Manufacturing at Kutch Polymer">
+        </div>
+      </div>
+    </div>
+    <div class="bg-pattern pattern-1"></div>
+    <div class="bg-pattern pattern-2"></div>
+  </section>
+
+  <section class="team-section">
+    <div class="container">
+      <div class="team-container">
+        <h2 class="section-title">
+          <span class="title-normal">Our</span>
+          <span class="title-colored">Leadership</span>
+        </h2>
+        <p class="team-description">Meet the visionary leaders who drive Kutch Polymer's mission and values, shaping our
+          company's future and guiding our path to excellence.</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-image-container">
+            <img src="./assets/images/about-banner-1.png" alt="Rajesh Kumar" class="team-image">
+          </div>
+          <div class="team-info">
+            <h3 class="team-name">Rajesh Kumar</h3>
+            <p class="team-position">Founder & CEO</p>
+            <p class="team-bio">With over 30 years of experience in the polymer industry, Rajesh founded Kutch Polymer
+              with a vision to revolutionize the sector. His leadership and strategic thinking have been instrumental in
+              the company's growth.</p>
+            <!-- <div class="team-social">
+              <a href="#" class="social-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path
+                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                </svg>
+              </a>
+              <a href="#" class="social-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path
+                    d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+                </svg>
+              </a>
+            </div> -->
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-image-container">
+            <img src="./assets/images/author.jpg" alt="Priya Sharma" class="team-image">
+          </div>
+          <div class="team-info">
+            <h3 class="team-name">Priya Sharma</h3>
+            <p class="team-position">Chief Innovation Officer</p>
+            <p class="team-bio">Priya leads our R&D division with her extensive knowledge in polymer science. Her
+              innovative approach has led to several breakthrough products and sustainable manufacturing processes.</p>
+            <!-- <div class="team-social">
+              <a href="#" class="social-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path
+                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                </svg>
+              </a>
+              <a href="#" class="social-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path
+                    d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+                </svg>
+              </a>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Animation for stats counting
+    document.addEventListener('DOMContentLoaded', () => {
+      // Add any interactive JavaScript here
+
+      // Example: Highlight active nav item
+      const currentPage = window.location.pathname.split('/').pop();
+      const navLinks = document.querySelectorAll('.nav-menu a');
+
+      navLinks.forEach(link => {
+        const linkPage = link.getAttribute('href');
+        if (linkPage === currentPage) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Wait for the DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+  // Page opening animation
+  animatePageOpening();
+  
+  // Setup scroll animations
+  setupScrollAnimations();
+  
+  // Highlight active nav item
+  highlightActiveNavItem();
+});
+
+// Function to handle the page opening animation
+function animatePageOpening() {
+  // Fade in the body with a smooth transition
+  document.body.style.opacity = 0;
+  document.body.style.transition = 'opacity 1.2s ease';
+  
+  setTimeout(() => {
+    document.body.style.opacity = 1;
+  }, 100);
+  
+  // Animate the hero content with a slight delay
+  setTimeout(() => {
+    const heroContent = document.querySelector('.hero-content');
+    if (heroContent) {
+      heroContent.style.opacity = 1;
+      heroContent.style.transform = 'translateY(0)';
+    }
+  }, 400);
+}
+
+// Setup for scroll-based animations
+function setupScrollAnimations() {
+  // Stats counter animation
+  setupStatsCounter();
+  
+  // Animate elements when they come into view
+  setupScrollReveal();
+}
+
+// Function to animate the stats counter when scrolled into view
+function setupStatsCounter() {
+  const statsSection = document.querySelector('.stats-section');
+  const statNumbers = document.querySelectorAll('.stat-number');
+  
+  // Store the target numbers
+  const targetNumbers = Array.from(statNumbers).map(stat => {
+    const value = stat.textContent.replace(/[^0-9]/g, '');
+    return parseInt(value, 10);
+  });
+  
+  // Reset the numbers to 0
+  statNumbers.forEach(stat => {
+    stat.textContent = '0';
+  });
+  
+  // Set up the Intersection Observer
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Start the counter animation for each stat
+        statNumbers.forEach((stat, index) => {
+          animateCounter(stat, 0, targetNumbers[index], 2000);
+        });
+        
+        // Unobserve after animation starts
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  
+  // Start observing the stats section
+  if (statsSection) {
+    observer.observe(statsSection);
+  }
+}
+
+// Function to animate counting from start to end
+function animateCounter(element, start, end, duration) {
+  let startTimestamp = null;
+  const step = (timestamp) => {
+    if (!startTimestamp) startTimestamp = timestamp;
+    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+    let value = Math.floor(progress * (end - start) + start);
+    
+    // Add the '+' symbol back if it was there originally
+    element.textContent = value + (element.textContent.includes('+') ? '+' : '');
+    
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    } else {
+      element.textContent = end + (element.textContent.includes('+') ? '+' : '');
+    }
+  };
+  window.requestAnimationFrame(step);
+}
+
+// Function to reveal elements when scrolled into view
+function setupScrollReveal() {
+  const sections = document.querySelectorAll('.story-section, .values-section, .sustainability-section, .team-section');
+  
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('appear');
+        
+        // Add a subtle scale animation to the section
+        entry.target.style.transform = 'scale(0.98)';
+        entry.target.style.opacity = '0';
+        
+        setTimeout(() => {
+          entry.target.style.transition = 'all 0.8s ease-out';
+          entry.target.style.transform = 'scale(1)';
+          entry.target.style.opacity = '1';
+        }, 100);
+        
+        // Unobserve after animation
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  sections.forEach(section => {
+    revealObserver.observe(section);
+  });
+  
+  // Animate feature items individually
+  const featureItems = document.querySelectorAll('.feature-item');
+  
+  const featureObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        // Staggered animation for features
+        setTimeout(() => {
+          entry.target.style.transition = 'all 0.6s ease-out';
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateX(0)';
+        }, index * 200);
+        
+        featureObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  featureItems.forEach(item => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateX(-20px)';
+    featureObserver.observe(item);
+  });
+  
+  // Animate value cards with a bounce effect
+  const valueCards = document.querySelectorAll('.value-card');
+  
+  const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }, index * 150);
+        
+        cardObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  valueCards.forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    cardObserver.observe(card);
+  });
+}
+
+// Highlight active navigation item
+function highlightActiveNavItem() {
+  const currentPage = window.location.pathname.split('/').pop();
+  const navLinks = document.querySelectorAll('.nav-menu a');
+
+  navLinks.forEach(link => {
+    const linkPage = link.getAttribute('href');
+    if (linkPage === currentPage) {
+      link.classList.add('active');
+    }
+  });
+}
+
+// Add a subtle parallax effect to the hero section
+window.addEventListener('scroll', () => {
+  const scrollPosition = window.scrollY;
+  const heroSection = document.querySelector('.hero');
+  
+  if (heroSection) {
+    const bgShapes = heroSection.querySelectorAll('.bg-shape');
+    
+    bgShapes.forEach((shape, index) => {
+      // Different parallax speeds for each shape
+      const speed = index === 0 ? 0.2 : 0.1;
+      shape.style.transform = `translateY(${scrollPosition * speed}px)`;
+    });
+  }
+});
+
+// Optional: Add a smooth scroll to top button
+function addScrollToTopButton() {
+  // Create the button
+  const scrollTopBtn = document.createElement('button');
+  scrollTopBtn.innerHTML = '↑';
+  scrollTopBtn.className = 'scroll-top-btn';
+  
+  // Style the button
+  scrollTopBtn.style.position = 'fixed';
+  scrollTopBtn.style.bottom = '20px';
+  scrollTopBtn.style.right = '20px';
+  scrollTopBtn.style.width = '40px';
+  scrollTopBtn.style.height = '40px';
+  scrollTopBtn.style.borderRadius = '50%';
+  scrollTopBtn.style.backgroundColor = 'var(--primary-color)';
+  scrollTopBtn.style.color = 'white';
+  scrollTopBtn.style.border = 'none';
+  scrollTopBtn.style.cursor = 'pointer';
+  scrollTopBtn.style.display = 'none';
+  scrollTopBtn.style.opacity = '0';
+  scrollTopBtn.style.transition = 'opacity 0.3s ease';
+  scrollTopBtn.style.fontSize = '20px';
+  
+  document.body.appendChild(scrollTopBtn);
+  
+  // Show/hide button based on scroll position
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) {
+      scrollTopBtn.style.display = 'block';
+      setTimeout(() => {
+        scrollTopBtn.style.opacity = '1';
+      }, 100);
+    } else {
+      scrollTopBtn.style.opacity = '0';
+      setTimeout(() => {
+        scrollTopBtn.style.display = 'none';
+      }, 300);
+    }
+  });
+  
+  // Scroll to top when clicked
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+}
+
+// Initialize the scroll to top button (optional)
+// addScrollToTopButton();
+  </script>
+  <script src="./assets/js/script.js"></script>
+</body>
+
+</html>

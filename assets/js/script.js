@@ -1,52 +1,95 @@
 'use strict';
 
 /**
- * element toggle function
+ * Element toggle function
  */
-
-const elemToggleFunc = function (elem) { elem.classList.toggle("active"); }
-
-
+const elemToggleFunc = function (elem) { 
+  elem.classList.toggle("active"); 
+}
 
 /**
- * navbar toggle
+ * Navbar toggle functionality
  */
-
 const navbar = document.querySelector("[data-navbar]");
 const overlay = document.querySelector("[data-overlay]");
 const navCloseBtn = document.querySelector("[data-nav-close-btn]");
-const navOpenBtn = document.querySelector("[data-nav-open-btn]");
+const navOpenBtns = document.querySelectorAll("[data-nav-open-btn]"); // Multiple buttons
 const navbarLinks = document.querySelectorAll("[data-nav-link]");
 
-const navElemArr = [overlay, navCloseBtn, navOpenBtn];
+/**
+ * Open navbar function
+ */
+const openNavbar = function() {
+  navbar.classList.add("active");
+  overlay.classList.add("active");
+}
 
 /**
- * close navbar when click on any navbar link
+ * Close navbar function
  */
-
-for (let i = 0; i < navbarLinks.length; i++) { navElemArr.push(navbarLinks[i]); }
+const closeNavbar = function() {
+  navbar.classList.remove("active");
+  overlay.classList.remove("active");
+}
 
 /**
- * addd event on all elements for toggling navbar
+ * Add event listeners to all nav open buttons (both mobile and desktop)
  */
+navOpenBtns.forEach(button => {
+  button.addEventListener("click", function(e) {
+    e.preventDefault();
+    openNavbar();
+  });
+});
 
-for (let i = 0; i < navElemArr.length; i++) {
-  navElemArr[i].addEventListener("click", function () {
-    elemToggleFunc(navbar);
-    elemToggleFunc(overlay);
+/**
+ * Add event listener to close button
+ */
+if (navCloseBtn) {
+  navCloseBtn.addEventListener("click", function(e) {
+    e.preventDefault();
+    closeNavbar();
   });
 }
 
-
+/**
+ * Close navbar when clicking on overlay
+ */
+if (overlay) {
+  overlay.addEventListener("click", function() {
+    closeNavbar();
+  });
+}
 
 /**
- * header active state
+ * Close navbar when clicking on any navbar link
  */
+navbarLinks.forEach(link => {
+  link.addEventListener("click", function() {
+    closeNavbar();
+  });
+});
 
+/**
+ * Header active state on scroll
+ */
 const header = document.querySelector("[data-header]");
 
-window.addEventListener("scroll", function () {
-  window.scrollY >= 400 ? header.classList.add("active")
-    : header.classList.remove("active");
-}); 
+if (header) {
+  window.addEventListener("scroll", function () {
+    if (window.scrollY >= 400) {
+      header.classList.add("active");
+    } else {
+      header.classList.remove("active");
+    }
+  });
+}
 
+/**
+ * Close navbar on escape key press
+ */
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") {
+    closeNavbar();
+  }
+});

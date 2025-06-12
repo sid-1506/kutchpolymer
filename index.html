@@ -25,6 +25,10 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
     rel="stylesheet">
+
+  <!-- AOS CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -33,94 +37,99 @@
     - #HEADER
   -->
 
-  <header class="header" data-header>
-
-    <div class="overlay" data-overlay></div>
-
-
-
-    <div class="header-bottom">
-      <div class="container">
-
-        <a href="#" class="logo">
-          <img src="./assets/images/logo.png" alt="kutchpolymer Logo">
-        </a>
-
-        <nav class="navbar" data-navbar>
-
-          <div class="navbar-top">
-
-            <a href="#" class="logo">
-              <img src="./assets/images/logo.png" alt="kutchpolymer Logo">
-            </a>
-
-            <button class="nav-close-btn" data-nav-close-btn aria-label="Close Menu">
-              <ion-icon name="close-outline"></ion-icon>
-            </button>
-
-          </div>
-
-          <div class="navbar-bottom">
-            <ul class="navbar-list">
-
-              <li>
-                <a href="#home" class="navbar-link" data-nav-link>Home</a>
-              </li>
-
-              <li>
-                <a href="About us.html" class="navbar-link" data-nav-link>About</a>
-              </li>
-
-              <li>
-                <a href="#blog" class="navbar-link" data-nav-link>Services</a>
-              </li>
-
-              <li>
-                <a href="contact.html" class="navbar-link" data-nav-link>Contact</a>
-              </li>
-
-            </ul>
-          </div>
-
-        </nav>
-
-        <div class="header-bottom-actions">
-
-          <button class="header-bottom-actions-btn" aria-label="Facebook">
-            <a href="https://www.facebook.com/people/Kutch-Polymer/61558686630039/" target="_blank">
-              <ion-icon name="logo-facebook"></ion-icon>
-            </a>
-            <span>Facebook</span>
+ <header class="header" data-header>
+  <div class="overlay" data-overlay></div>
+  
+  <div class="header-bottom">
+    <div class="container">
+      <a href="#" class="logo">
+        <img src="./assets/images/logo.png" alt="kutchpolymer Logo">
+      </a>
+      
+      <nav class="navbar" data-navbar>
+        <div class="navbar-top">
+          <a href="#" class="logo">
+            <img src="./assets/images/logo.png" alt="kutchpolymer Logo">
+          </a>
+          <button class="nav-close-btn" data-nav-close-btn aria-label="Close Menu">
+            <ion-icon name="close-outline"></ion-icon>
           </button>
-
-          <button class="header-bottom-actions-btn" aria-label="Instagram">
-            <a href="https://www.instagram.com/kutch_polymers/" target="_blank">
-              <ion-icon name="logo-instagram"></ion-icon>
-            </a>
-            <span>Instagram</span>
-          </button>
-
-          <button class="header-bottom-actions-btn" aria-label="Cart"> <a href="https://wa.me/919820556353?text=Hey"
-              target="_blank"><ion-icon name="logo-whatsapp"></ion-icon></a>
-
-
-            <span>Whatsapp</span>
-          </button>
-
-          <button class="header-bottom-actions-btn" data-nav-open-btn aria-label="Open Menu">
-            <ion-icon name="menu-outline"></ion-icon>
-
-            <span>Menu</span>
-          </button>
-
         </div>
-
+        
+        <div class="navbar-bottom">
+          <ul class="navbar-list">
+            <li>
+              <a href="#home" class="navbar-link" data-nav-link>Home</a>
+            </li>
+            <li>
+              <a href="About us.html" class="navbar-link" data-nav-link>About</a>
+            </li>
+            <li>
+              <a href="#blog" class="navbar-link" data-nav-link>Services</a>
+            </li>
+            <li>
+              <a href="contact.html" class="navbar-link" data-nav-link>Contact</a>
+            </li>
+          </ul>
+          
+          <!-- Social media icons at bottom of mobile navbar -->
+          <div class="navbar-social">
+            <button class="navbar-social-btn" aria-label="Facebook">
+              <a href="https://www.facebook.com/people/Kutch-Polymer/61558686630039/" target="_blank">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+              <span>Facebook</span>
+            </button>
+            <button class="navbar-social-btn" aria-label="Instagram">
+              <a href="https://www.instagram.com/kutch_polymers/" target="_blank">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+              <span>Instagram</span>
+            </button>
+            <button class="navbar-social-btn" aria-label="Whatsapp">
+              <a href="https://wa.me/919820556353?text=Hey" target="_blank">
+                <ion-icon name="logo-whatsapp"></ion-icon>
+              </a>
+              <span>Whatsapp</span>
+            </button>
+          </div>
+        </div>
+      </nav>
+      
+      <!-- Desktop social icons and menu button -->
+      <div class="header-bottom-actions">
+        <button class="header-bottom-actions-btn" aria-label="Facebook">
+          <a href="https://www.facebook.com/people/Kutch-Polymer/61558686630039/" target="_blank">
+            <ion-icon name="logo-facebook"></ion-icon>
+          </a>
+          <span>Facebook</span>
+        </button>
+        <button class="header-bottom-actions-btn" aria-label="Instagram">
+          <a href="https://www.instagram.com/kutch_polymers/" target="_blank">
+            <ion-icon name="logo-instagram"></ion-icon>
+          </a>
+          <span>Instagram</span>
+        </button>
+        <button class="header-bottom-actions-btn" aria-label="Whatsapp">
+          <a href="https://wa.me/919820556353?text=Hey" target="_blank">
+            <ion-icon name="logo-whatsapp"></ion-icon>
+          </a>
+          <span>Whatsapp</span>
+        </button>
+        <button class="header-bottom-actions-btn menu-toggle-btn" data-nav-open-btn aria-label="Open Menu">
+          <ion-icon name="menu-outline"></ion-icon>
+          <span>Menu</span>
+        </button>
       </div>
+      
+      <!-- Mobile menu button (separate from desktop actions) -->
+      <button class="mobile-menu-btn" data-nav-open-btn aria-label="Open Menu">
+        <ion-icon name="menu-outline"></ion-icon>
+        <span>Menu</span>
+      </button>
     </div>
-
-  </header>
-
-
+  </div>
+</header>
 
 
 
@@ -241,7 +250,6 @@
 
 
 
-
       <!-- 
         - #SERVICE
       -->
@@ -256,7 +264,7 @@
           <ul class="service-list">
 
             <li>
-              <div class="service-card">
+              <div class="service-card" data-aos="fade-up">
 
                 <div class="card-icon">
                   <img src="assets/images/volunteer_activism_100dp_0079CC_FILL0_wght400_GRAD0_opsz48.svg"
@@ -284,7 +292,7 @@
             </li>
 
             <li>
-              <div class="service-card">
+              <div class="service-card" data-aos="fade-up">
 
                 <div class="card-icon">
                   <img src="assets/images/valve_100dp_0079CC_FILL0_wght400_GRAD0_opsz48.svg" alt="Service icon"
@@ -310,7 +318,7 @@
             </li>
 
             <li>
-              <div class="service-card">
+              <div class="service-card" data-aos="fade-up">
 
                 <div class="card-icon">
                   <img src="assets/images/handyman_39dp_0079CC_FILL0_wght400_GRAD0_opsz40.svg" alt="Service icon"
@@ -705,6 +713,16 @@
   -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <!-- AOS JS -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+  </script>
+
 
 </body>
 
